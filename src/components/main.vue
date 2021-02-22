@@ -2,23 +2,11 @@
   <a-layout id="components-layout-demo-custom-trigger">
     <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
       <div class="logo">LOGO</div>
-      <a-menu theme="dark" mode="inline" :default-selected-keys="['1']">
-        <a-menu-item key="1">
-          <router-link to="/">
+      <a-menu theme="dark" mode="inline" :default-selected-keys="currentPath">
+        <a-menu-item v-for="item in routes" :key="item.path">
+          <router-link :to="item.path">
             <a-icon type="user"/>
-            <span>测试1</span>
-          </router-link>
-        </a-menu-item>
-        <a-menu-item key="2">
-          <router-link to="/test2">
-            <a-icon type="video-camera"/>
-            <span>测试2</span>
-          </router-link>
-        </a-menu-item>
-        <a-menu-item key="3">
-          <router-link to="/test3">
-            <a-icon type="upload"/>
-            <span>测试3</span>
+            <span>{{item.meta.name}}</span>
           </router-link>
         </a-menu-item>
       </a-menu>
@@ -46,8 +34,15 @@
         collapsed: false,
       }
     },
-    created () {
-      console.log(this.$router)
+    computed: {
+      routes () {
+        return this.$router.options.routes[0].children
+      },
+      currentPath () {
+        return [
+          this.$route.path,
+        ]
+      },
     },
   }
 </script>

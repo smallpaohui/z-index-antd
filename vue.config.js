@@ -3,7 +3,7 @@ module.exports = {
     host: '0.0.0.0',
     port: 2414,
     disableHostCheck: true,
-    open: false,
+    open: true,
     proxy: 'http://simbajs.com:7890',
   },
   chainWebpack: config => {
