@@ -27,8 +27,8 @@ const plugin = {
     // Vue.component('z-xxx', xxx)
     //自动化引入文件=>require.context('文件夹名称',true(是否遍历整个文件夹),/\.vue$/(正则筛选文件))
 
-    //Vue实例扩展(项目中可以使用this.$axios来调用axios)
-    // Vue.prototype.$axios = axios
+    // Vue实例扩展(项目中可以使用this.$axios来调用axios)
+    // Vue.prototype.$message = $message
   },
 }
 export default plugin

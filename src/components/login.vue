@@ -42,17 +42,12 @@
     },
     methods: {
       signIn () {
-        this.$refs.form.validate(valid => {
-          if (valid && this.form.UserName === 'admin' && this.form.PassWord === '123123') {
-            this.$notification.success({
-              message: '登录成功',
-            })
+        this.$valid('form').then(() => {
+          if (this.form.UserName === 'admin' && this.form.PassWord === '123123') {
+            this.$ms('登陆成功')
             this.$router.push('/')
           } else {
-            this.$notification.error({
-              message: '登录失败',
-              description: `请确认账号密码后重试`,
-            })
+            this.$me('登录失败', '请确认账号密码后重试')
             this.form.PassWord = undefined
           }
         })
