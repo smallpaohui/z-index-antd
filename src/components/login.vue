@@ -1,20 +1,22 @@
 <template>
-  <div class="content">
+  <div class="bac">
+    <div class="content">
 
-    <div class="content_input">
-      <div class="title">
-        <p>管理员登录</p>
-      </div>
-      <a-form-model ref="form" :model="form" :label-col="{ span: 1 }" :wrapper-col="{ span: 23 }" :rules="rules">
-        <a-form-model-item label="" prop="UserName">
-          <a-input allowClear v-model="form.UserName" placeholder="用户名/admin"></a-input>
-        </a-form-model-item>
-        <a-form-model-item prop="PassWord">
-          <a-input-password label="" allowClear v-model="form.PassWord" placeholder="密码/123123"></a-input-password>
-        </a-form-model-item>
-      </a-form-model>
-      <div class="content_button">
-        <a-button block type="primary" @click="signIn">登录</a-button>
+      <div class="content_input">
+        <div class="title">
+          <p>管理员登录</p>
+        </div>
+        <a-form-model ref="form" :model="form" :label-col="{ span: 1 }" :wrapper-col="{ span: 23 }" :rules="rules">
+          <a-form-model-item label="" prop="UserName">
+            <a-input allowClear v-model="form.UserName" placeholder="用户名/admin"></a-input>
+          </a-form-model-item>
+          <a-form-model-item prop="PassWord">
+            <a-input-password label="" allowClear v-model="form.PassWord" placeholder="密码/123123"></a-input-password>
+          </a-form-model-item>
+        </a-form-model>
+        <div class="content_button">
+          <a-button block type="primary" @click="signIn">登录</a-button>
+        </div>
       </div>
     </div>
   </div>
@@ -45,7 +47,7 @@
         this.$valid('form').then(() => {
           if (this.form.UserName === 'admin' && this.form.PassWord === '123123') {
             this.$ms('登陆成功')
-            sessionStorage.setItem('name',this.form.UserName)
+            sessionStorage.setItem('name', this.form.UserName)
             this.$router.push('/')
           } else {
             this.$me('登录失败', '请确认账号密码后重试')
@@ -58,6 +60,13 @@
 </script>
 
 <style scoped>
+  .bac {
+    width: 100%;
+    height: 100%;
+    background: url("../assets/bac.jpg") no-repeat;
+    background-size:100% 100%;
+  }
+
   .content {
     width: 500px;
     height: 350px;
