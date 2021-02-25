@@ -19,15 +19,17 @@
             @click="() => (collapsed = !collapsed)"
         />
         <div style="display: flex;align-items: center;padding: 0 20px">
-          <a-avatar style="margin: 0 5px;box-shadow: 0 0 2px #666" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+          <a-avatar style="margin: 0 5px;box-shadow: 0 0 2px #666"
+                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
           <a-dropdown :trigger="['click']">
             <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-              admin <a-icon type="down" />
+              admin
+              <a-icon type="down"/>
             </a>
             <a-menu slot="overlay">
-              <a-menu-item @click="$router.push('/login')">
+              <a-menu-item @click="userOut">
                 <a href="javascript:;">
-                  <a-icon type="poweroff" />
+                  <a-icon type="poweroff"/>
                   退出登录
                 </a>
               </a-menu-item>
@@ -49,6 +51,12 @@
       return {
         collapsed: false,
       }
+    },
+    methods: {
+      userOut () {
+        this.$router.push('/login')
+        sessionStorage.clear()
+      },
     },
     computed: {
       routes () {

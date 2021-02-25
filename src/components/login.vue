@@ -45,6 +45,7 @@
         this.$valid('form').then(() => {
           if (this.form.UserName === 'admin' && this.form.PassWord === '123123') {
             this.$ms('登陆成功')
+            sessionStorage.setItem('name',this.form.UserName)
             this.$router.push('/')
           } else {
             this.$me('登录失败', '请确认账号密码后重试')

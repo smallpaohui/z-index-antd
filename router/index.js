@@ -11,8 +11,17 @@ const router = new VueRouter({
 })
 //路由跳转前
 router.beforeEach((to, from, next) => {
-  NProgress.start()//开启进度条
-  next()
+  if (!to.meta.need) {
+    if (sessionStorage.getItem("name")) {
+      NProgress.start()//开启进度条
+      next()
+    } else {
+      next('/login')
+    }
+  } else {
+    NProgress.start()//开启进度条
+    next()
+  }
 })
 
 router.afterEach(() => {

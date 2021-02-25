@@ -11,6 +11,9 @@ let routes = [
   {
     path: '/login',
     component: () => import('@/components/login.vue'),
+    meta: {
+      need: true,
+    },
   }, {
     path: '*',
     component: () => import('@/components/404.vue'),
