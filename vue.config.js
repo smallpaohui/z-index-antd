@@ -4,7 +4,7 @@ module.exports = {
     port: 2414,
     disableHostCheck: true,
     open: true,
-    proxy: 'http://simbajs.com:7890',
+    proxy: 'http://simbajs.com:7001',
   },
   chainWebpack: config => {
     config.plugin('html').tap(rag => {
