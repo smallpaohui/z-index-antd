@@ -1,9 +1,10 @@
 import axios from 'axios'
+import notification from 'ant-design-vue/lib/notification'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 NProgress.configure({
-  showSpinner:false
+  showSpinner: false,
 })
 
 // 添加请求拦截器
@@ -13,6 +14,11 @@ axios.interceptors.request.use(function (config) {
   return config
 }, function (error) {
   // 对请求错误做些什么
+  notification.error({
+    message: `请求失败,错误为${error.message}`,
+    description: '请检查网络重试',
+    duration: 2,
+  })
   return Promise.reject(error)
 })
 
@@ -23,6 +29,11 @@ axios.interceptors.response.use(function (response) {
   return response
 }, function (error) {
   // 对响应错误做点什么
+  notification.error({
+    message: `响应失败,错误为${error.message}`,
+    description: '请联系管理员',
+    duration: 2,
+  })
   return Promise.reject(error)
 })
 

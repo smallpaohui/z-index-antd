@@ -1,5 +1,8 @@
 let context = require.context('./modules', true, /\.js$/)
-let childrenRoutes = context.keys().map(filePath => context(filePath).default)
+let childrenRoutes = context.keys().reduce((routes, filePath) => {
+  routes.push(...context(filePath).default)
+  return routes
+}, [])
 
 
 let routes = [

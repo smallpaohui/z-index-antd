@@ -13,11 +13,17 @@
     </a-layout-sider>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0;display: flex;justify-content:space-between">
-        <a-icon
-            class="trigger"
-            :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-            @click="() => (collapsed = !collapsed)"
-        />
+        <div style="display: flex;align-items: center;padding: 0 20px">
+          <a-icon
+              class="trigger"
+              :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+              @click="() => (collapsed = !collapsed)"
+          />
+          <a-breadcrumb>
+            <a-breadcrumb-item>首页</a-breadcrumb-item>
+            <a-breadcrumb-item v-if="this.$route.meta.name!=='首页'">{{this.$route.meta.name}}</a-breadcrumb-item>
+          </a-breadcrumb>
+        </div>
         <div style="display: flex;align-items: center;padding: 0 20px">
           <a-avatar style="margin: 0 5px;box-shadow: 0 0 2px #666"
                     src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
@@ -60,11 +66,12 @@
     },
     computed: {
       routes () {
-        return this.$router.options.routes[0].children
+        let menu = this.$router.options.routes[0].children.filter(r => !r.meta.hide)
+        return menu
       },
       currentPath () {
         return [
-          this.$route.path,
+          this.$route.meta.menuKey ? this.$route.meta.menuKey : this.$route.path,
         ]
       },
     },
@@ -77,7 +84,6 @@
 
   #components-layout-demo-custom-trigger .trigger {
     font-size: 18px;
-    line-height: 64px;
     padding: 0 24px;
     cursor: pointer;
     transition: color 0.3s;

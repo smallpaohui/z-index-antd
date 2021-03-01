@@ -4,6 +4,10 @@
       新增
     </a-button>
 
+    <a-button @click="$router.push('/test2/add')" type="primary" style="margin-bottom: 10px;margin-left: 10px">
+      复杂跳转新增
+    </a-button>
+
     <a-modal v-model="visible" :title='this.edit?"编辑":"新增"' @ok="handleOk" :afterClose="clearForm">
       <a-form-model ref="form" :model="form" :label-col="{ span: 6 }" :wrapper-col="{ span: 14 }" :rules="rules">
         <a-form-model-item label="订单号" prop="orderno">
@@ -151,6 +155,8 @@
           this.pagination.total = res.data.data.total
           this.data = list
           this.loading = false
+        }).catch(() => {
+          this.loading = false
         })
       },
       handledEdit (record) {
@@ -168,10 +174,14 @@
           okText: '确定',
           onOk: () => {
             this.data.splice(this.data.findIndex(r => r.id === id), 1)
-            this.$notification.success({
-              message: '操作成功',
-              description: `已删除订单号为${orderno}的订单`,
-            })
+            this.pagination.total -= 1
+            //这种方式判断可以避免多个人同时操作的情况导致bug，而判断data的数量不行
+            let totalPage = Math.ceil(this.pagination.total / 10)
+            if (totalPage < this.pagination.current) {
+              this.pagination.current = totalPage
+              this.getList()
+            }
+            this.$ms('操作成功', `已删除订单号为${orderno}的订单`)
           },
         })
       },

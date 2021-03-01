@@ -1,7 +1,9 @@
-export default {
-  path: '/',
-  component: () => import('@/components/test'),
-  meta:{
-    name:'首页'
-  }
-}
+export default [
+  {
+    path: '/',
+    component: () => import('@/components/test'),
+    meta: {
+      name: '首页',
+    },
+  },
+]
