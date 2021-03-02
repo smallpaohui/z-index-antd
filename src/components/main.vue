@@ -44,7 +44,7 @@
         </div>
       </a-layout-header>
       <a-layout-content
-          :style="{ margin: '24px 16px', padding: '24px', background: `${this.$route.path==='/'?'#F0F2F5':'#fff'}`, minHeight: '280px' }"
+          :style="{ margin: '24px 16px', padding: '24px', background: `${this.$route.path==='/'?'#F0F2F5':'#fff'}`, minHeight: '280px',overflowY:'scroll' }"
       >
         <router-view></router-view>
       </a-layout-content>
